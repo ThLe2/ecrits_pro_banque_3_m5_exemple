@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exemple commenté — Une réponse alourdie, puis allégée</title>
+<style>
+:root{--prune:#8C1E70;--prune-fonce:#5E1349;--prune-clair:#F4E6EE;--accent:#C77BAA;
+ --vert:#283C28;--gris:#3C3C3C;--gris-moyen:#8A7A85;--filet:#E8DCE5;--creme:#FAF6F8;
+ --ok:#2F7A4F;--ko:#B23B3B;--amb:#B5852A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--creme);color:var(--gris);
+ font-family:"Nunito","Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.62}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 60px}
+header.bandeau{background:var(--prune-fonce);color:#fff;padding:18px 0;border-bottom:4px solid var(--accent)}
+header.bandeau .wrap{padding-bottom:0}
+.chapitre{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#EAD3E3}
+.chapitre span{color:var(--accent);margin:0 6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.25;margin:8px 0 4px;color:#fff}
+.sous{color:#EAD3E3;font-size:14.5px;margin:0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:var(--prune-fonce);
+ margin:34px 0 0;padding-bottom:8px;border-bottom:2px solid var(--filet)}
+h2 .num{color:var(--accent);margin-right:8px}
+h3{font-size:15px;color:var(--vert);margin:20px 0 8px;letter-spacing:.02em}
+.carte{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:20px 22px;margin:18px 0;
+ box-shadow:0 1px 2px rgba(94,19,73,.05)}
+.enc{background:var(--prune-clair);border-left:5px solid var(--prune);padding:14px 18px;
+ border-radius:0 8px 8px 0;margin:18px 0;font-size:15.2px}
+.enc .t{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+ font-weight:800;color:var(--prune-fonce);margin-bottom:6px}
+.enc.al{background:#FBF4F4;border-left-color:var(--ko)}.enc.al .t{color:var(--ko)}
+.enc.ci{background:#FCF8F0;border-left-color:var(--amb)}.enc.ci .t{color:#8A6418}
+.situ{background:#FCF9FB;border:1px dashed var(--filet);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:15.2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}
+.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:7px;font-size:14.5px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.quad>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:12px 13px;font-size:13.6px}
+.quad .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13px;
+ text-transform:uppercase;letter-spacing:.04em}
+.tri .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;
+ text-transform:uppercase;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.8px;background:#fff}
+th,td{border:1px solid var(--filet);padding:9px 12px;text-align:left}
+thead th{background:var(--prune-clair);color:var(--prune-fonce);font-size:13.5px}
+tbody th{font-weight:600;color:var(--gris)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td,tr.tot th{background:#FBF3F8;font-weight:800;color:var(--prune-fonce)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;text-decoration:none;
+ padding:11px 20px;border-radius:8px;font-weight:700;font-size:15px;margin:20px 0 4px}
+.dl:hover{background:var(--prune-fonce)}
+ol.q{padding-left:0;list-style:none;counter-reset:q}
+ol.q>li{margin:16px 0;padding-left:38px;position:relative}
+ol.q>li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:1px;
+ width:26px;height:26px;border-radius:50%;background:var(--prune-clair);color:var(--prune-fonce);
+ font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+b,strong{color:var(--vert)}
+footer{text-align:center;font-size:12.5px;color:var(--gris-moyen);padding:26px 18px 12px;
+ border-top:1px solid var(--filet);margin-top:44px}
+@media(max-width:860px){.quad{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.duo,.tri,.quad{grid-template-columns:1fr}h1{font-size:22px}}
+@media print{body{background:#fff}.dl{display:none}header.bandeau{background:#5E1349 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.mail{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:0;margin:16px 0;overflow:hidden}
+.mail .ent{background:#F7F1F5;border-bottom:1px solid var(--filet);padding:10px 16px;font-size:14px}
+.mail .ent b{color:var(--prune-fonce)}
+.mail .txt{padding:14px 18px;font-size:15.2px}
+.mail p{margin:0 0 10px}
+.err{background:#FDECEC;border-bottom:2px solid var(--ko);padding:0 2px;border-radius:3px}
+.cor{display:none;background:#E9F6EE;border-bottom:2px solid var(--ok);padding:0 2px;border-radius:3px;color:var(--ok);font-weight:700}
+.nf{font-size:11px;vertical-align:super;font-weight:800;color:var(--ko)}
+body.vu .err{text-decoration:line-through;background:none;border:0;color:var(--gris-moyen)}
+body.vu .cor{display:inline}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;border:0;
+ padding:12px 22px;border-radius:8px;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.btn:hover{background:var(--prune-fonce)}
+.liste{display:none}body.vu .liste{display:block}
+</style></head>
+<body>
+<header class="bandeau"><div class="wrap">
+ <div class="chapitre">Écrits professionnels · banque 3/5 <span>/</span> Module 5</div><h1>Une réponse alourdie, puis allégée</h1><p class="sous">Exemple commenté — Des mots précis et des phrases légères</p>
+</div></header>
+<div class="wrap">
+
+<h2><span class="num">1 ·</span>Le mail tel qu'il a été écrit</h2>
+<div class="carte">
+<p>Un conseiller répond à un client qui demande où en est son virement. Tout est exact, mais le mail est lourd et truffé de jargon. <b>HUIT PASSAGES</b> sont à alléger. Cherchez-les, puis affichez la version corrigée.</p>
+<div class="mail">
+ <div class="ent"><b>Objet :</b> Votre virement du 18 novembre</div>
+ <div class="txt"><p>Bonjour Monsieur Petit,</p><p>Vous nous avez <span class="err">fait une demande d'information</span> <span class="cor">demandé des informations</span><span class="nf">1</span> <span class="err">concernant le fait de savoir où en était</span> <span class="cor">sur</span><span class="nf">2</span> votre virement du 18 novembre.</p><p><span class="err">J'ai checké votre dossier et le process a bien été respecté</span> <span class="cor">J'ai vérifié votre dossier : le virement a bien été exécuté</span><span class="nf">3</span> le jour même.</p><p><span class="err">La VoP</span> <span class="cor">Le contrôle du nom du bénéficiaire</span><span class="nf">4</span> a signalé que le nom saisi ne correspondait pas exactement à celui du titulaire du compte ; <span class="err">vous avez néanmoins décidé de procéder à la validation de l'opération</span> <span class="cor">vous avez néanmoins confirmé le virement</span><span class="nf">5</span>.</p><p>Les fonds <span class="err">sont arrivés à destination sur le compte de votre bénéficiaire, ce qui veut dire que l'opération est terminée et qu'il n'y a plus rien à faire de votre côté</span> <span class="cor">sont arrivés sur le compte de votre bénéficiaire. Vous n'avez rien d'autre à faire</span><span class="nf">6</span>.</p><p>Je reste à votre écoute <span class="err">pour toute information supplémentaire complémentaire</span> <span class="cor">pour toute information complémentaire</span><span class="nf">7</span> : je peux vous rappeler cet après-midi, <span class="err">voire même</span> <span class="cor">voire</span><span class="nf">8</span> dans l'heure, si vous le souhaitez.</p><p>Bien cordialement,</p><p>Lucas Morel — Conseiller clientèle</p></div>
+</div>
+<button class="btn" id="voir" onclick="document.body.classList.add('vu');this.style.display='none'">Afficher la correction</button>
+</div>
+
+<div class="liste">
+<h2><span class="num">2 ·</span>Les corrections, une par une</h2>
+<div class="carte">
+<table><thead><tr><th>N°</th><th>Point</th><th>Le raisonnement</th></tr></thead><tbody><tr><td><b>1</b></td><td>périphrase</td><td>« Faire une demande d'information » remplace un seul verbe : « demander des informations ».</td></tr><tr><td><b>2</b></td><td>périphrase</td><td>« Concernant le fait de savoir où en était » : six mots pour dire « sur ».</td></tr><tr><td><b>3</b></td><td>anglicismes et jargon</td><td>« Checker », « process » : à bannir avec un client. On dit ce qu'on a fait : « j'ai vérifié », et ce qui s'est passé : « le virement a été exécuté ».</td></tr><tr><td><b>4</b></td><td>sigle interne</td><td>« VoP » (Verification of Payee) est un sigle d'outil. Le client a vécu un contrôle du nom du bénéficiaire : on le nomme ainsi.</td></tr><tr><td><b>5</b></td><td>périphrase</td><td>« Procéder à la validation de l'opération » : « confirmer le virement ».</td></tr><tr><td><b>6</b></td><td>phrase trop longue</td><td>Une phrase de plus de trente mots. Deux phrases courtes disent la même chose plus clairement.</td></tr><tr><td><b>7</b></td><td>pléonasme</td><td>« supplémentaire complémentaire » : les deux mots disent la même chose.</td></tr><tr><td><b>8</b></td><td>pléonasme</td><td>« voire » signifie déjà « et même » : « voire même » est une incorrection.</td></tr></tbody></table>
+</div>
+
+<h2><span class="num">3 ·</span>Ce qu'il faut en retenir</h2>
+<div class="carte"><div class="enc"><span class="t">CE QUE CET EXEMPLE MONTRE</span>La version d'origine compte près de cent mots, la version corrigée une soixantaine, sans perdre aucune information. Alléger, c'est respecter le temps du client.</div><div class="enc al"><span class="t">CE QUE LE CLIENT RETIENT</span>Un client qui lit « process » et « VoP » ne sait toujours pas si son argent est arrivé. La version allégée répond à sa question dès la deuxième phrase.</div><div class="enc ci"><span class="t">LA MÉTHODE</span>Pour chaque phrase : un verbe simple plutôt qu'une périphrase, un mot français plutôt qu'un sigle ou un anglicisme, quinze à vingt mots au maximum.</div></div>
+</div>
+
+
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+</div>
+</body></html>
